@@ -257,3 +257,14 @@ class AStar:
                             cost_with_heuristic = total_cost_to_node + euc_dist       
                             self.open_list.put((cost_with_heuristic, next_node[1]))
                             self.parent_node[next_node[1]] = current_node 
+    
+    def generate_path(self):
+        end_node = self.goal_node
+        while end_node is not None:
+            self.found_path.append(end_node)
+            end_node = self.parent_node[end_node]
+        self.found_path.reverse()
+        return self.found_path
+    
+    def get_explored_list(self):
+        return self.explored_list
