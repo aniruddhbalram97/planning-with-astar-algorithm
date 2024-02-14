@@ -12,8 +12,8 @@ class AStar:
         self.open_list = PriorityQueue()
         self.close_list = np.zeros((500, 1200, 12), np.uint8)
         self.explored_list = []
-        self.cost_of_node = []
-        self.parent_node = []
+        self.cost_of_node = {}
+        self.parent_node = {}
         self.found_path = []
         
         self.open_list.put((0, self.initial_node))
