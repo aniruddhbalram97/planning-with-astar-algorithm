@@ -268,3 +268,4 @@ class AStar:
     
     def get_explored_list(self):
         return self.explored_list
+    

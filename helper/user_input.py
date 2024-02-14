@@ -2,6 +2,7 @@ class UserInput:
     def __init__(self, obstacle_map):
         self.goal_node = None
         self.initial_node = None
+        self.step_size = None
         self.obstacle_map  = obstacle_map
         
     def enter_coordinates(self):
@@ -15,6 +16,17 @@ class UserInput:
         goal_node = (x_goal, self.obstacle_map.shape[0] - y_goal - 1, orientation_final)
         return initial_node, goal_node
     
+    def enter_step_size(self):
+        self.step_size = int(input("Enter step-size (1 - 10): "))
+        return self.step_size
+    
+    def check_valid_step_size(self):
+        if(self.step_size > 10 or self.step_size < 1):
+            print("\n Enter valid step size b/w 1 and 10 \n")
+            return False
+        else:
+            return True
+        
     def check_valid_entry(self):
         if(
         self.obstacle_map[self.initial_node[1]][self.initial_node[0]][0]==255 or \
@@ -40,4 +52,8 @@ class UserInput:
         self.initial_node, self.goal_node = self.enter_coordinates()
         while(not self.check_valid_entry()):
             self.initial_node, self.goal_node = self.enter_coordinates()
-        return self.initial_node, self.goal_node
+            
+        self.step_size = self.enter_step_size()
+        while(not self.check_valid_step_size):
+            self.step_size = self.enter_step_size()
+        return self.initial_node, self.goal_node, self.step_size
